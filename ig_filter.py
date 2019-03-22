@@ -5,19 +5,11 @@ ap = argparse.ArgumentParser()
 ap.add_argument("-f", "--filename")
 args = vars(ap.parse_args())
 
-filename = "images/sinb.jpg"
+filename = "images/yuju.jpg"
 if args['filename']:
   filename = args['filename']
 
 src = cv2.imread(filename)
-
-# scaleFactor = 1.5
-# ycbImage = cv2.cvtColor(src,cv2.COLOR_BGR2YCrCb)
-# ycbImage = np.float32(ycbImage)
-# Ychannel, Cr, Cb = cv2.split(ycbImage)
-# Ychannel = np.clip(Ychannel * scaleFactor , 0, 255)
-# ycbImage = np.uint8( cv2.merge([Ychannel, Cr, Cb]) )
-# imcontrast = cv2.cvtColor(ycbImage, cv2.COLOR_YCrCb2BGR)
 
 # Median blur
 kernelSize = 5
@@ -27,9 +19,9 @@ dst = cv2.medianBlur(src,kernelSize)
 # dst=cv2.GaussianBlur(src,(5,5), 0,0)
 
 # Bilateral filtering
-# dia=15;
-# sigmaColor=80;
-# sigmaSpace=80;
+# dia=15
+# sigmaColor=80
+# sigmaSpace=80
 # dst = cv2.bilateralFilter(src, dia, 
 #                         sigmaColor, 
 #                         sigmaSpace)
@@ -47,6 +39,6 @@ imSat = cv2.cvtColor(hsvImage, cv2.COLOR_HSV2BGR)
 combined = np.hstack([src, imSat])
 cv2.namedWindow("image", cv2.WINDOW_AUTOSIZE)
 cv2.imshow("Original   --   Output", combined)
-cv2.imwrite("results/ig_filter/test1.jpg", imSat)
+cv2.imwrite("results/ig_filter/ig_filter3.jpg", imSat)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
